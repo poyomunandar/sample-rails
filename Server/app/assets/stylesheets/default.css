@@ -1,0 +1,21 @@
+/* CSS */
+
+div.panel,.flip{
+  margin:0px;
+  padding:5px;
+  text-align:center;
+  background:#e5eecc;
+  border:solid 1px #c3c3c3;
+}
+.panel{
+  display:none;
+}
+.fontBold{
+  font-weight: bold;
+}
+.label, .field{float:left;}
+.label {clear:both;width:200px;}
+.fleft{float:left;}
+.cboth{clear:both;}
+
+.invisible{visibility:hidden;display:none;}

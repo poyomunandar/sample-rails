@@ -1,0 +1,12 @@
+---
+server:
+  IP: localhost
+  PORT: 3000
+  PAGINATE_PER_PAGE: 10
+  API_USERNAME: test
+  API_PASSWORD: password
+agent:
+  PORT: 4567
+  MAX_RUNNING_PROCESS: '900'
+  MAX_CPU_USAGE: '100'
+  MAX_DISK_USAGE: '80'

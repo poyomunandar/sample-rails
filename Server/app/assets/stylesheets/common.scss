@@ -1,0 +1,381 @@
+/* Common styles */
+
+html { height: 100%; }
+body { height: 100%; }
+
+body {
+  margin: 0px;
+  background: #fff image_url('bg.png') repeat;
+  color: #333;
+  min-width: 1200px;
+}
+
+body, .ui-widget {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+  margin: 0px auto;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+caption.underlined {
+  padding: 5px;
+  border-bottom: solid 2px #d0d0d0;
+}
+
+th {
+  padding: 5px;
+  border-bottom: solid 2px #d0d0d0;
+  text-align: left;
+}
+
+td {
+  padding: 5px;
+  border-top: solid 1px #e0e0e0;
+  cursor: default;
+}
+
+h1 { font-size: medium; }
+h2 { font-size: small; font-style: italic; color: #666666; }
+
+a {
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #666;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #666;
+}
+
+/* New stuff ------------------------------------------------------------------------------------ */
+
+h1 {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+  font-size: medium;
+  color: #415469;
+}
+
+#page_header {
+  position: relative;
+  margin-bottom: -60px;
+  background: image_url('bg_ov_light.png') repeat;
+  z-index: 1;
+}
+
+#page_header > div {
+  width: 1200px;
+  height: 60px;
+  margin: 0px auto;
+}
+
+#logo {
+  display: block;
+  width: 150px;
+  height: 60px;
+  color: #415469;
+  float: left;
+}
+
+#logo > img {
+  display: block;
+  width: 150px;
+  height: 60px;
+  border: none;
+}
+
+#menu {
+  position: relative;
+  width: auto;
+  height: 60px;
+  float: right;
+}
+
+#menu > div {
+  float: left;
+}
+
+#menu > div > a {
+  display: block;
+  width: auto;
+  height: auto;
+  line-height: 30px;
+  margin: 15px 0px 0px 40px;
+  padding: 0px;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: right;
+  font-weight: normal;
+  font-family: arial, helvetica, sans-serif;
+  color: #415469;
+  border-bottom: solid 3px transparent;
+}
+
+#menu > div > a:hover, #menu > div > a.active {
+  border-color: #415469;
+}
+
+#menu ul {
+  position: absolute;
+  display: none;
+  width: auto;
+  height: auto;
+  margin: 8px 0px 0px auto;
+  padding: 0px;
+  list-style-type: none;
+  background-color: #cfd2d9;
+  top: 52px;
+  float: right;
+  z-index: 1000;
+}
+
+#menu ul > li {
+  display: block;
+  height: 30px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#menu ul > li.splitter {
+  height: 1px;
+  background-color: #9a9ea7;
+}
+
+#menu ul > li a {
+  display: block;
+  width: auto;
+  height: 30px;
+  line-height: 30px;
+  padding: 0px 10px;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  font-size: small;
+  text-align: right;
+  font-weight: normal;
+  font-family: arial, helvetica, sans-serif;
+  color: #23272f;
+  transition: background .2s ease-in-out;
+  -moz-transition: background .2s ease-in-out;
+  -webkit-transition: background .2s ease-in-out;
+}
+
+#menu ul > li a:hover {
+  background-color: #aaaeb7;
+}
+
+#page_content {
+  position: relative;
+  min-height: 100%;
+  z-index: 0;
+}
+
+#page_content > div {
+  width: 1200px;
+  margin: 0px auto;
+  padding: 60px 0px 100px 0px;
+}
+
+* html #page_content { height: 100%; }
+
+div.page_notice {
+  max-width: 600px;
+  min-height: 40px;
+  line-height: 40px;
+  color: #C96660;
+  float: left;
+}
+
+#page_content_wrap {
+  width: 1180px;
+  padding: 9px;
+  background-color: #fff;
+  box-shadow: #c1c4c9 0px 0px 2px;
+  border: solid 1px #d1d4d9;
+  border-radius: 5px;
+  overflow: hidden;
+  float: left;
+}
+
+#page_sidebar_wrap {
+  display: none;
+  width:300px;
+  padding: 5px;
+  background-color: #fff;
+  box-shadow: #c1c4c9 0px 0px 2px;
+  border: solid 1px #d1d4d9;
+  border-radius: 5px;
+  float: right;
+}
+
+#page_footer {
+  position: relative;
+  margin-top: -60px;
+  background: image_url('bg_ov_dark.png') repeat;
+  z-index: 1;
+}
+
+#page_footer > div {
+  width: 1200px;
+  height: 60px;
+  margin: 0px auto;
+}
+
+#page_footer > div > span.copyright {
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  margin: 20px 0px;
+  color: #f0f0f0;
+  float: left;
+}
+
+#page_footer > div > img.logo_factory {
+  display: block;
+  width: 70px;
+  height: 40px;
+  margin: 10px 0px;
+  float: right;
+}
+
+div.clean {
+  width: 100%;
+  height: 0px;
+  clear: both;
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+.loginBar{
+  background:image_url('login.jpg');
+  background-repeat:repeat-x;
+  height:50pt;
+  font: bold 16px Verdana;
+}
+
+#loginText{
+  margin-top:18px;
+  font-weight:bolder;
+}
+
+.tablescollbar{
+  width:1024px;
+  height:600px;
+  overflow:auto;
+}
+
+.loginTable{
+  background-color:white;
+  border-color:black;
+  width:400px;
+}
+
+.loginField{
+  width: 250px;
+}
+
+#loginFoot{
+  font-size:10px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.welcomePage a{
+  color:#0000cc;
+}
+
+.welcomePage h2,.welcomePage li{
+  font-family:"Myriad Pro";
+  font-weight:normal;
+  font-size:12pt;
+}
+
+.welcomePage h3{
+  font-family:"Myriad Pro";
+  font-weight:bold;
+  font-size:14pt;
+  color:#333333;
+}
+
+.tabDiv{
+  background-repeat:no-repeat;
+  float:right;
+  height:23px;
+  width:125px;
+}
+
+#tabLink a,#tabLink a:hover{
+  color:black;
+  font-weight:bold;
+  text-decoration:none;
+  background:none;
+}
+
+.current{
+  background-color: #aaa;
+  border-radius: 4px;
+  padding:2px 6px;
+}
+
+#AutoNewLine{
+  word-break:break-all;
+  overflow:hidden;
+}
+
+/* too short selects (without options or all short options) look bad */
+.input_search{
+  min-width: 100px;
+}
+
+/* Control styles */
+
+a.button {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: solid 1px #303030;
+  border-radius: 3px;
+}
+
+a.wide_button span {
+  background-color: #e0e0e0;
+}
+
+a.wide_button_new span {
+  background-color: #d7e8fc;
+}
+
+a.wide_button_fire span, a.wide_button_start span {
+  background-color: #ffaa33;
+}
+
+a.wide_button:hover.wide_button_new, a.wide_button:hover.wide_button_new span {
+  background-color: #ccddf0;
+}
+
+a.wide_button:hover.wide_button_fire, a.wide_button:hover.wide_button_fire span, a.wide_button:hover.wide_button_start, a.wide_button:hover.wide_button_start span {
+  background-color: #ed9e2f;
+}
+
+a.wide_button:hover, a.wide_button:hover span {
+  background-color: #c0c0c0;
+}
+
+div.paginate_extended {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

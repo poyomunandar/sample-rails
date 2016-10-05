@@ -1,0 +1,56 @@
+<center><h1>Running Process</h1></center>
+<%= form_tag running_process_path, :id => 'filter_form', :method => :get do %>
+    <table style="width: 1200px; margin-bottom: 10px;">
+      <tr>
+        <td>Start Time:
+          <%= datetime_select :filter, :start_date, use_month_numbers: true, default: @pfilter[:start_time] %>
+        </td>
+        <td>End Time:
+          <%= datetime_select :filter, :end_date, use_month_numbers: true, :default => @pfilter[:end_time] %>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          <% 
+            data_to_print = 'Created at,Server IP,Total Running Process'
+            @processes.each do |data| 
+              data_to_print += ";#{data.created_at.to_s},#{data.server_ip},#{data.total_process}"
+            end
+          %>
+          <%= hidden_field_tag :data_to_print, data_to_print %>  
+          <%= submit_tag 'Filter' %>
+          <%= submit_tag 'Find Max Running Process'%>
+          <%= submit_tag 'Find Min Running Process'%>
+          <%= submit_tag 'Export As PDF'%>
+        </td>
+      </tr>
+    </table>
+<% end %>
+
+<table border="1" style="width: 1200px">
+  <tr>
+    <th>Date</th>
+    <th>Server IP</th>
+    <th>Total Running Process</th>
+  </tr>
+<% for process in @processes %>
+  <tr>
+    <td>
+      <%= process.created_at %>
+    </td>
+    <td>
+      <%= process.server_ip %>
+    </td>
+    <td>
+      <%= process.total_process %>
+    </td>
+  </tr>
+<% end %>
+  <tr>
+	<td class="lastTd" colspan="12">
+   	<div <%= will_paginate(@processes) %></div>
+	</td>
+  </tr>
+</table>

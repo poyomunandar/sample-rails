@@ -1,0 +1,24 @@
+<center><h1>Configure Alert</h1></center>
+
+<%= form_tag configure_alert_path, :id => 'filter_form', :method => :get do %>
+  <table style="width: 1200px; margin-bottom: 10px;">
+    <tr>
+      <td>Limit for Maximum CPU Usage</td>
+      <td><%= number_field_tag :limit_cpu_usage, @limit_cpu_usage, max: 100,min: 0 %></td>
+    </tr>
+    <tr>
+      <td>Limit for Maximum Disk Usage</td>
+      <td><%= number_field_tag :limit_disk_usage, @limit_disk_usage, max: 100,min: 0 %></td>
+    </tr>
+    <tr>
+      <td>Limit for Maximum Running Process</td>
+      <td><%= number_field_tag :limit_running_process, @limit_running_process, max: 99999,min: 0 %></td>
+    </tr>
+    <tr>
+      <td>
+        <%= submit_tag 'Update' %>
+      </td>
+    </tr>
+  </table>
+
+<% end %>

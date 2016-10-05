@@ -1,0 +1,56 @@
+<center><h1>Disk Usage</h1></center>
+<%= form_tag disk_usage_path, :id => 'filter_form', :method => :get do %>
+    <table style="width: 1200px; margin-bottom: 10px;">
+      <tr>
+        <td>Start Time:
+          <%= datetime_select :filter, :start_date, use_month_numbers: true, default: @pfilter[:start_time] %>
+        </td>
+        <td>End Time:
+          <%= datetime_select :filter, :end_date, use_month_numbers: true, :default => @pfilter[:end_time] %>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          <% 
+            data_to_print = 'Created at,Server IP,Disk Usage'
+            @disks.each do |data| 
+              data_to_print += ";#{data.created_at.to_s},#{data.server_ip},#{data.disk_usage}"
+            end
+          %>
+          <%= hidden_field_tag :data_to_print, data_to_print %>  
+          <%= submit_tag 'Filter' %>
+          <%= submit_tag 'Find Max Usage'%>
+          <%= submit_tag 'Find Min Usage'%>
+          <%= submit_tag 'Export As PDF'%>
+        </td>
+      </tr>
+    </table>
+<% end %>
+
+<table border="1" style="width: 1200px">
+  <tr>
+    <th>Date</th>
+    <th>Server IP</th>
+    <th>Disk Usage</th>
+  </tr>
+<% for disk in @disks %>
+  <tr>
+    <td>
+      <%= disk.created_at %>
+    </td>
+    <td>
+      <%= disk.server_ip %>
+    </td>
+    <td>
+      <%= disk.disk_usage %>
+    </td>
+  </tr>
+<% end %>
+  <tr>
+	<td class="lastTd" colspan="12">
+   	<div <%= will_paginate(@disks) %></div>
+	</td>
+  </tr>
+</table>

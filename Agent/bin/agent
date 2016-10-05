@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+
+$:.unshift File.join(File.dirname(__FILE__))
+require 'sinatra'
+require 'httparty'
+require_relative '../lib/agent/server'
+ 
+# otherwise sinatra won't always automagically launch its embedded 
+# http server when this script is executed
+set :bind, '0.0.0.0'
+set :run, true
+
+SERVER = Agent::Server.new
+
+Thread.new do # trivial example work thread
+  server_port = ConfigLoader.new.config_for("server")["PORT"].to_s
+  server_ip = ConfigLoader.new.config_for("server")["IP"].to_s
+  agent_ip = ConfigLoader.new.config_for("agent")["IP"].to_s
+  base_url = "http://#{server_ip}:#{server_port}/webservices"
+  while true do
+    sleep 10
+    # send cpu_usage, disk_usage, and running process to server
+    begin
+      resp_running_process = HTTParty.get("#{base_url}/running_process?user=test&password=password&agent_ip=#{agent_ip}&value=#{SERVER.running_process}")
+      resp_cpu_usage = HTTParty.get("#{base_url}/cpu_usage?user=test&password=password&agent_ip=#{agent_ip}&value=#{SERVER.cpu_usage}")
+      resp_disk_usage = HTTParty.get("#{base_url}/disk_usage?user=test&password=password&agent_ip=#{agent_ip}&value=#{SERVER.disk_usage}")
+      if resp_running_process.code == 500
+        SERVER.alert resp_running_process
+      end
+      if resp_cpu_usage.code == 500
+        SERVER.alert resp_cpu_usage
+      end
+      if resp_disk_usage.code == 500
+        SERVER.alert resp_disk_usage
+      end
+    rescue Exception => e
+      puts e.message
+    end
+  end
+end
+ 
+get '/cpu_usage' do
+  return SERVER.cpu_usage
+end
+
+get '/disk_usage' do
+  return SERVER.disk_usage
+end
+
+get '/running_process' do
+  return SERVER.running_process
+end
+
+get '/alert' do
+  return 'failed' if params['message'].nil?
+  SERVER.alert params['message']
+  return 'success'
+end

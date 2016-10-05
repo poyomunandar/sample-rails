@@ -1,0 +1,8 @@
+server:
+  IP: localhost
+  PORT: 3000
+  
+agent:
+  IP: 192.168.1.105
+  PORT: 4567
+  ALERT_FILENAME: /home/poyo/WarningMessage.log
