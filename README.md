@@ -11,7 +11,7 @@ Steps:
   - Leave the other
 3. Run gem install bundle from command console  
 4  Run bundle install from command console 
-5. Run bin/crossover_trial_agent from command console
+5. Run bin/agent from command console
 
 
 SERVER
