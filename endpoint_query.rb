@@ -1,4 +1,13 @@
 result_all = {}
+  
+def isDir? dir
+  begin
+    Dir.new(dir)
+  rescue
+    return false
+  end
+  return true
+end
 
 def read_dir(dir, criterias)
   result = []
@@ -6,7 +15,7 @@ def read_dir(dir, criterias)
   dir.each do |file|
     next if file == '.' || file == '..'
     fullpath = dir.path + '\\' + file
-    if Dir.exist?(fullpath)
+    if isDir?(fullpath)
       result << read_dir(fullpath, criterias)
     else
       pass = false
