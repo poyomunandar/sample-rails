@@ -79,13 +79,18 @@ services_dir.flatten.each do |filename| begin
 end
 
 endpoint_query = {}
-controllers_dir = read_dir(path,['Controller.','trunk'])
+controllers_dir = read_dir(path,['(Controllers|controllers)','trunk'])
 
 controllers_dir.flatten.each do |filename| begin
     file_content = File.readlines(filename)
     current_method = ''
+    current_classname = ''
     file_content.each do |line|
       next if /^[ \t]*\/\//.match(line) # do not process if it's remarked
+      # checking if the line contains class declaration
+      if /class[ \t]+([a-zA-Z0-9]+)[\t ]*\{/.match(line)
+        current_classname = Regexp.last_match.captures[0]
+      end  
       # checking if the line contains method declaration
       if /[a-zA-Z0-9]+[ \t]+([a-zA-Z0-9 \t]+)\([a-zA-Z0-9 \t,]*\)[\t ]*\{/.match(line)
         if (current_method != Regexp.last_match.captures[0])
@@ -94,14 +99,15 @@ controllers_dir.flatten.each do |filename| begin
       end
       endpoint = {}
       config_file = filename.split('\\')[0..8].join('\\') + '\\conf\application.yml'
-      if (!endpoint[config_file] && /context-path:[ \t]*'(\/[a-zA-Z0-9]+)'/.match(IO.read(config_file)))
-        prefix =  Regexp.last_match.captures[0]
+      if (!endpoint[config_file] && /(context-path|contextPath)[ \t]*:[ \t]*[']*(\/[a-zA-Z0-9]+)[']*/.match(IO.read(config_file)))
+        prefix =  Regexp.last_match.captures[1]
         endpoint[config_file] = prefix
       end
       # check if there is service calling
       if /[ \t]+([a-zA-Z0-9]+Service\.[a-zA-Z0-9]+)/.match(line)
         key = Regexp.last_match.captures[0]
-        endpoint_query[endpoint[config_file] + '/' + current_method] = result_all[key.downcase] || ['No query']
+        endpoint_name = ((endpoint[config_file].downcase == ('/' + current_classname.gsub(/Controller/,'').downcase)) ? endpoint[config_file] : (endpoint[config_file] + '/' + current_classname.gsub(/Controller/,''))) + '/' + current_method
+        endpoint_query[endpoint_name] = result_all[key.downcase] || ['No query']
       end
     end
   rescue
